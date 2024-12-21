@@ -30,8 +30,8 @@
 	</head>
 
 	<body style="margin:0px">
-		<audio autoplay loop>
-			<source src="music/music.mp3" type="audio/mpeg">
+		<audio id="backgroundMusic" loop hidden>
+			<source src="music/Waking Up Together With You.mp3" type="audio/mpeg">
 			Your browser does not support the audio.
 		</audio>
 		<canvas></canvas>
@@ -61,11 +61,12 @@
         	<span id="txt2"></span>
     	</div>		
 
-		<script >
+		<script>
 			var ok = 0;
 			var flag = 1;
 			var myImage = document.getElementById("img");
 			var myTxt = document.getElementById("Txt");
+			var backgroundMusic = document.getElementById("backgroundMusic");
 			var imageArray = ["pic/pic1.png", "pic/pic2.png", "pic/pic3.png", "pic/pic4.png", "pic/pic5.png", "pic/pic6.png", 
 			"pic/pic7.png", "pic/pic8.png", "pic/pic9.png", "pic/pic10.png", "pic/pic11.png", "pic/pic12.png", "pic/pic13.png",
 			"pic/pic14.png", "pic/pic15.png", "pic/pic16.png"];
@@ -75,9 +76,30 @@
 			  "Kemang, November 28, 2024", "Dufan, November 30, 2024", "GKI KB, December 01, 2024", "Blok M, December 03, 2024", 
 			  "GBK, December 07, 2024", "GBK, December 07, 2024", "HKBP Rawamangun, December 08, 2024", "FM Pondok Bambu, December 13, 2024",
 			  "HKBP Sutoyo, December 15, 2024", "WS Tebet, December 19, 2024"];
-			 var len = imageArray.length;
+			var len = imageArray.length;
 			var t = 0;
+		
+			function play() {
+				// Pastikan audio hanya diputar setelah interaksi pengguna
+				if (backgroundMusic.paused) {
+					backgroundMusic.play(); // Memulai audio
+					document.getElementById("clickMe").innerText = "Pause"; // Mengubah teks tombol
+				} else {
+					backgroundMusic.pause(); // Memberhentikan audio
+					document.getElementById("clickMe").innerText = "Click!"; // Mengembalikan teks tombol
+				}
+			}
+
+			// Menambahkan event listener untuk memastikan bahwa audio dapat diputar saat interaksi
+			document.getElementById("button").addEventListener("click", function() {
+				if (backgroundMusic.paused) {
+					backgroundMusic.play();
+				} else {
+					backgroundMusic.pause();
+				}
+			});
 		</script>
+		
 		
 		<script type="text/javascript" src="./js/stars.js"></script>
 		<script type="text/javascript" src="./js/typeWriter.js"></script>
